@@ -15,10 +15,10 @@ public class TimeInterceptor implements HandlerInterceptor{
 
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
-        System.out.println("preHandler");
+        System.out.println("interceptor preHandler");
         
-        System.out.println(((HandlerMethod) handler).getBean().getClass().getName());
-        System.out.println(((HandlerMethod) handler).getMethod().getName());
+        System.out.println("intercecptor: "+((HandlerMethod) handler).getBean().getClass().getName());
+        System.out.println("intercecptor: "+((HandlerMethod) handler).getMethod().getName());
         
         request.setAttribute("startTime", new Date().getTime());
         return true;
@@ -27,18 +27,18 @@ public class TimeInterceptor implements HandlerInterceptor{
 	
 	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
 			 ModelAndView modelAndView) throws Exception {
-		  System.out.println("postHandler");
+		  System.out.println("intercecptor postHandler");
 		  
 		  Long start = (Long)request.getAttribute("startTime");
-		  System.out.println("time inteceptor 耗时: "+(new Date().getTime()-start));
+		  System.out.println(" time inteceptor postHandler耗时: "+(new Date().getTime()-start));
 	}
 
 	
 	public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler,
 			 Exception ex) throws Exception {
-		  System.out.println("afterCompletion");
+		  System.out.println("intercecptor afterCompletion");
 		  Long start = (Long)request.getAttribute("startTime");
-		  System.out.println("time inteceptor 耗时: "+(new Date().getTime()-start));
-	      System.out.println("ex is "+ex.getMessage());
+		  System.out.println("time inteceptor afterCompletion 耗时: "+(new Date().getTime()-start));
+	      //System.out.println("intercecptor ex is "+ex.getMessage());
 	}
 }
